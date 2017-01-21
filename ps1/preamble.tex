@@ -1,0 +1,50 @@
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bm}
+
+\usepackage{libertine}
+
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    pdftitle={Geometrical Control Theory problem set 1},
+    pdfauthor={Vasilas Nikos},
+    pdfsubject={Geometrical Control Theory},
+    pdfcreator={Vasilas Nikos},
+    pdfproducer={Vasilas Nikos},
+    pdfkeywords={control, nonlinear, math},
+}
+
+\usepackage{graphicx}
+\usepackage[small,bf]{caption}
+\usepackage{subcaption}
+
+\usepackage{booktabs}
+
+\usepackage
+[a4paper, top=1.0in, bottom=1.0in, left=1.0in, right=0.75in]{geometry}
+\headsep=20pt
+\footskip=30pt
+
+\usepackage{authoraftertitle}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\thispagestyle{plain}
+\begin{flushleft}
+    \textbf{\Huge{\@title}\\}
+    \vspace{2em}
+    \@author
+    \vspace{2em}
+\end{flushleft}\egroup
+}
+\makeatother
+
+\usepackage{csquotes}
+\usepackage[backend=biber, bibencoding=auto, autolang=other]{biblatex}
+\addbibresource{bible.bib}

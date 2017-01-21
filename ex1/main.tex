@@ -1,0 +1,181 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[english,greek]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bm}
+
+\usepackage{libertine}
+
+\usepackage{url}
+\usepackage[hidelinks,unicode]{hyperref}
+
+\usepackage{graphicx}
+\usepackage[small,bf]{caption}
+\usepackage{subcaption}
+
+\newcommand{\vc}[1]{\bm{#1}} % this is a vector
+\newcommand{\mt}[1]{\boldsymbol{#1}} % this is a matrix
+
+\newcommand{\tl}[1]{\textlatin{#1}}
+\newcommand{\gr}[1]{\greektext{#1}}
+\newcommand{\greek}[1]{{\selectlanguage{greek}#1}}
+\newcommand{\eng}[1]{{\selectlanguage{english}#1}}
+
+\newenvironment{exercise}[2][Άσκηση]
+{\begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+{\end{trivlist}}
+
+\newenvironment{solution}[2][Λύση]
+{\begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+{\end{trivlist}}
+
+\begin{document}
+
+\title{Ασκήσεις Γεωμετρικής Θεωρίας Ελέγχου}
+\author{Βασίλας Νικόλαος}
+\maketitle
+\begin{exercise}{1}
+    Για τα σημεία που είναι στο βόρειο και στο ανατολικό ημισφαίριο της
+    μοναδιαίας σφαίρας έχουμε δύο χάρτες $\psi_{z^+}$ και $\psi_{y^+}$. Να δείξετε
+    ότι $\psi_{y^+}^{-1} \circ \psi_{z^+}$ είναι $C^k$.
+\end{exercise}
+\begin{solution}{1}
+    Η μοναδιαία σφαίρα $S^2 \subset \mathbb{R}^3$ περιγράφεται από
+    \begin{equation*}
+        S^2 = \{ (x, y, z) \in \mathbb{R}^3: x^2 + y^2 + z^2 = 1\}.
+    \end{equation*}
+    Μπορούμε να ορίσουμε τους χάρτες $(U_{y^+}, \phi_{y^+})$ και $(U_{z^+},
+    \phi_{z^+})$ όπου
+    \begin{equation*}
+        U_{y^+} = \{(x, y, z) \in S^2: y > 0\}, \quad \psi_{y^+}(x, y, z) = (x,
+        z),
+    \end{equation*}
+    και
+    \begin{equation*}
+        U_{z^+} = \{(x, y, z) \in S^2: z > 0\}, \quad \psi_{z^+}(x, y, z) = (x,
+        y).
+    \end{equation*}
+    Για να δείξω ότι $\psi_{z^+}$ και $\psi_{y^+}$ είναι ομοιομορφισμοί, αρκεί
+    να βρω τις αντίστροφες συναρτήσεις και να δείξω ότι είναι συνεχείς. Έτσι
+    έχουμε
+    \begin{align*}
+        \psi_{y^+}^{-1}(x, z) &= \left( x, \sqrt{1 - x^2 - z^2}, z \right) \in S^2,\\
+        \psi_{z^+}^{-1}(x, y) &= \left( x, y, \sqrt{1 - x^2 - y^2} \right) \in S^2,
+    \end{align*}
+    όπου είναι συνεχείς συναρτήσεις και άρα ομοιομορφισμοί, αλλά και
+    παραγωγίσιμες $C^{\infty}$ συναρτήσεις. Συνεπώς, αφού $\psi_{z^+}$,
+    $\psi_{y^+}$ καθώς και $\psi_{z^+}^{-1}$, $\psi_{y^+}^{-1}$ είναι
+    $C^{\infty}$ συναρτήσεις τότε και η σύνθεση
+    $\psi_{y^+}^{-1} \circ \psi_{z^+}$ θα είναι $C^{\infty}$.
+\end{solution}
+\begin{exercise}{2}
+    Αν $M$ είναι λεία πολλαπλότητα, $TM$ είναι η εφαπτόμενη δέσμη της $M$, $\pi:
+    TM \rightarrow M$ είναι η απεικόνιση προβολής και $X: M \rightarrow TM$
+    διανυσματικό πεδίο, τότε να δείξετε ότι $\pi \circ X = id_M$.
+\end{exercise}
+\begin{solution}{2}
+    Σύμφωνα με το \footnote{\tl{Boothby, W.M., \emph{An Introduction to Differentiable
+    Manifolds and Riemannian Geometry}, Academic Press, 1975}},
+    ένα διανυσματικό πεδίο $X$ κλάσης $C^r$ σε μία πολλαπλότητα $M$
+    είναι μία συνάρτηση η οποία σε κάθε σημείο $p \in M$ αντιστοιχεί ένα
+    εφαπτόμενο διάνυσμα $X_p \in T_pM$ του οποίου οι συνιστώσες ως προς
+    κάποιο τοπικό χάρτη $(U, \phi)$ είναι συναρτήσεις κλάσης $C^r$ στο πεδίο
+    ορισμού $U$ των συντεταγμένων. Επομένως, $\pi \circ X = id_M$ είναι άμεση
+    συνέπεια του ορισμού καθώς $(\pi \circ X)(p) = \pi(X_p) = p$ και προφανώς
+    ισχύει μόνο για διανυσματικά πεδία αφού το πεδίο ορισμού της $\pi$ είναι
+    $TM$. Πολλές φορές όπως για παράδειγμα στο βιβλίο \footnote{\tl{Lee, J.M., \emph{Introduction to
+    Smooth Manifolds}, Springer, 2003}}, το διανυσματικό πεδίο ορίζεται ως μία συνεχής
+    συνάρτηση $X: M \rightarrow TM$ με την ιδιότητα $\pi \circ X = id_M$.
+\end{solution}
+\begin{exercise}{3}
+    Να αποδείξετε την ταυτότητα του \tl{Jacobi}
+    \begin{equation*}
+        [X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0.
+    \end{equation*}
+\end{exercise}
+\begin{solution}{3}
+    Έστω δύο διανυσματικά πεδία $X,Y$ σε μία πολλαπλότητα $M^n$ και για μία συνάρτηση
+    $f \in C^{\infty}(M^n)$ τότε η αγκύλη \tl{Lie} είναι
+    \begin{equation*}
+        [X, Y]f = YXf - XYf.
+    \end{equation*}
+    Σύμφωνα με το παραπάνω υπολογίζουμε τον πρώτο όρο της ταυτότητας του
+    \tl{Jacobi} να είναι
+    \begin{align}\label{eq:3_1}
+        [X, [Y, Z]]f &= [Y, Z]Xf - X[Y, Z]f\nonumber \\
+        &= (ZY - YZ)Xf - X(ZY - YZ)f \nonumber \\
+        &= ZYXf - YZXf - XZYf + XYZf.
+    \end{align}
+    Αντίστοιχα ο δεύτερος όρος είναι
+    \begin{align}\label{eq:3_2}
+        [Y, [Z, X]]f &= [Z, X]Yf - Y[Z, X]f\nonumber \\
+        &= (XZ - ZX)Yf - Y(XZ - ZX)f \nonumber \\
+        &= XZYf - ZXYf - YXZf + YZXf,
+    \end{align}
+    και ο τελευταίος είναι
+    \begin{align}\label{eq:3_3}
+        [Z, [X, Y]]f &= [X, Y]Zf - Z[X, Y]f\nonumber \\
+        &= (YX - XY)Zf - Z(YX - XY)f \nonumber \\
+        &= YXZf - XYZf - ZYXf + ZXYf.
+    \end{align}
+    Αντικαθιστώντας τις σχέσεις \eqref{eq:3_1}, \eqref{eq:3_2} και
+    \eqref{eq:3_3} στην ταυτότητα του \tl{Jacobi} παρατηρούμε ότι όλοι οι όροι
+    διαγράφονται και επομένως η ταυτότητα ικανοποιείται.
+\end{solution}
+\begin{exercise}{4}
+    Για $B \in SO(3, \mathbb{R})$ δείξτε ότι έχει μία ιδιοτιμή $\lambda = 1$.
+\end{exercise}
+\begin{solution}{4}
+    Η ορθογώνια ομάδα ορίζεται
+    \begin{equation*}
+        O(n, \mathbb{R}) = \{B \in GL(n, \mathbb{R}) : B^{-1} = B^T \},
+    \end{equation*}
+    και η ειδική ορθογώνια ομάδα, που είναι μία υποομάδα της ορθογώνιας ομάδας ορίζεται
+    \begin{equation*}
+        SO(n, \mathbb{R}) = \{B \in O(n, \mathbb{R}) : \text{\tl{det}}(B) = 1 \}.
+    \end{equation*}
+    Είναι γνωστό ότι για οποιοδήποτε $n \times n$ μητρώο ισχύει ότι
+    \begin{equation*}
+        \text{\tl{det}}(B) = \lambda_1 \lambda_2 \cdots \lambda_n = 1,
+    \end{equation*}
+    όπου $\lambda_i$ είναι οι ιδιοτιμές του $B$. Επίσης το χαρακτηριστικό
+    πολυώνυμο του μητρώου είναι
+    \begin{equation}\label{eq:4_poly}
+        p(\lambda) = \text{\tl{det}}\left[ \lambda I - B \right] = b_0 \lambda^n +
+        b_1 \lambda_1^{n-1} + \dots + b_{n-1}\lambda + b_n.
+    \end{equation}
+    Οι συντελεστές $b_i$ της παραπάνω σχέσης είναι πραγματικοί αριθμοί και
+    επομένως αν $z$ είναι μία μιγαδική λύση που ικανοποιεί τη \eqref{eq:4_poly}
+    τότε και η συζυγής μιγαδική λύση $\bar{z}$ θα ικανοποιεί τη
+    \eqref{eq:4_poly}. Αν $B \in O(n, \mathbb{R})$ τότε ο μετασχηματισμός που
+    επιβάλει το μητρώο διατηρεί το εσωτερικό γινόμενο. Για τα διανύσματα
+    $u, v$ το εσωτερικό γινόμενο είναι
+    \begin{equation*}
+        u \cdot v = u^Tv,
+    \end{equation*}
+    και η επίδραση του μητρώου $B$ είναι
+    \begin{equation*}
+        Bu \cdot Bv = (Bu)^T Bv = u^T B^T Bv = u^Tv.
+    \end{equation*}
+    Έτσι σύμφωνα με το παραπάνω μπορούμε να πούμε ότι το μητρώο $B$ δεν
+    επηρεάζει το μέτρο ενός διανύσματος $u$ καθώς αυτό ορίζεται ως
+    $u = \sqrt{u \cdot u}$. Επομένως αν $u$ είναι το
+    ιδιοδιάνυσμα του μητρώου $B$ τότε ισχύει
+    \begin{equation*}
+        \left|B u \right| = \left|u \right|,
+    \end{equation*}
+    και άρα ισχύει
+    \begin{equation*}
+        \left|B u \right| = \left|\lambda u \right| = \left| u \right|,
+    \end{equation*}
+    που σημαίνει ότι $| \lambda | = 1$. Τελικά, σύμφωνα με αυτά που
+    αναφέρθηκαν παραπάνω, οι πιθανές ρίζες του χαρακτηριστικού πολυωνύμου είναι
+    $(1, 1, 1)$ ή $(1, -1, -1)$ ή $(1, z, \bar{z})$, και άρα σίγουρα για μία
+    ιδιοτιμή ισχύει ότι $\lambda = 1$.
+\end{solution}
+\end{document}
