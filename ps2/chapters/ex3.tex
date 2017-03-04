@@ -1,0 +1,200 @@
+\begin{exercise}{2016/17 3}
+    \emph{Οι εξισώσεις \tl{Lorentz}}: Όπως είναι γνωστό το παρακάτω απλό σύστημα
+    σε τρεις διαστάσεις που μελετήθηκε το \( 1963 \) από τον \tl{E. Lorenz}
+    παρουσιάζει \enquote*{χαοτική συμπεριφορά} για κάποιες τιμές των παραμέτρων
+    του.
+    \begin{align*}
+        \dot{x} &= \sigma(y - x) \\
+        \dot{y} &= \rho x - y - xz \\
+        \dot{z} &= \beta z + xy, \quad ( \sigma, \rho, beta > 0).
+    \end{align*}
+    Προς το παρόν, θα δούμε κάποια βασικά χαρακτηριστικά του.
+    \begin{enumerate}[label= (\alph*)]
+        \item Βρείτε τα σημεία ισορροπίας του και την εξάρτησή τους από τις
+            παραμέτρους.
+        \item Δείξτε ότι ο κάθετος άξονας \( z \) είναι αναλλοίωτη ευθεία για το
+            σύστημα και περιγράψτε τη δυναμική πάνω του. Επίσης, δείξτε ότι το
+            σύστημα έχει τη συμμετρία \( (x, y, z) \to (-x, -y, z) \).
+        \item Δείξτε ότι
+            \begin{enumerate}[label= (\roman*)]
+                \item για \( 0 < \rho < 1 \), το σημείο ισορροπίας στο \( 0 \)
+                    είναι ολικά ασυμπτωτικά ευσταθές, κάνοντας χρήση της
+                    συνάρτησης \tl{Lyapunov}
+                    \begin{equation*}
+                        V(x, y, z) = \rho x^2 + \sigma(y^2 + z^2).
+                    \end{equation*}
+                \item για \( \rho > 1 \), το σημείο ισορροπίας \( 0 \) έχει
+                    μονοδιάστατη ασταθή πολλαπλότητα \( W^u(0) \).
+            \end{enumerate}
+    \end{enumerate}
+\end{exercise}
+\begin{solution}{2016/17 3}
+    (α). Τα σημεία ισορροπίας υπολογίζονται από τις σχέσεις
+    \begin{align*}
+        0 &= \sigma(y - x) \\
+        0 &= \rho x - y - xz \\
+        0 &= \beta z + xy
+    \end{align*}
+    Από την πρώτη σχέση προκύπτει
+    \[
+        y = x.
+    \]
+    Με αντικατάσταση αυτής στην τρίτη
+    και λύνοντας ως προς \( z \) προκύπτει
+    \[
+        z = \frac{x^2}{\beta}.
+    \]
+    Τέλος, με αντικατάσταση των δύο παραπάνω σχέσεων στην δεύτερη έχουμε
+    \[
+        0 = \rho x - x \frac{x^2}{\beta} = x \left( \rho -1 - \frac{x^2}{\beta}
+        \right),
+    \]
+    που σημαίνει \( x = 0 \), ή
+    \begin{align*}
+        0 &= \rho -1 - \frac{x^2}{\beta} \\
+        x^2 &= \beta(\rho - 1),
+    \end{align*}
+    και για \( \rho > 1 \) προκύπτει \( x = \pm\sqrt{\beta(\rho - 1)} \).
+
+    Τελικά, τα σημεία ισορροπίας είναι το \( \left(0, 0, 0\right) \) και αν \( \rho > 1 \) έχουμε
+    και τα σημεία \( \left(\sqrt{\beta(\rho - 1)}, \sqrt{\beta(\rho - 1)}, \rho
+    -1\right) \) και \( \left( -\sqrt{\beta(\rho - 1)}, -\sqrt{\beta(\rho - 1)},
+    \rho -1 \right) \).
+
+    Για να διαπιστώσουμε τη μορφή των σημείων ισορροπίας θα πάρουμε τη
+    γραμμικοποίηση του συστήματος. Αν γράψουμε το σύστημα στη μορφή
+    \begin{equation*}
+        \begin{pmatrix}
+            \dot{x} \\
+            \dot{y} \\
+            \dot{z}
+        \end{pmatrix} = F(x, y, z) =
+        \begin{pmatrix}
+            \sigma(y - x) \\
+            \rho x - y - xz \\
+            \beta z + xy
+        \end{pmatrix},
+    \end{equation*}
+    τότε η Ιακωβιανή είναι
+    \begin{equation*}
+        DF(x, y, z) =
+        \begin{pmatrix}
+            -\sigma & \sigma & 0 \\
+            \rho - z & -1 & -x \\
+            y & x & -\beta \\
+        \end{pmatrix}.
+    \end{equation*}
+    Έτσι για την αρχή ισχύει
+    \begin{equation*}
+        DF(0, 0, 0) =
+        \begin{pmatrix}
+            -\sigma & \sigma & 0 \\
+            \rho & -1 & 0 \\
+            0 & 0 & -\beta \\
+        \end{pmatrix}.
+    \end{equation*}
+    Είναι εμφανές ότι μία ιδιοτιμή είναι \( \lambda_1 = -\beta < 0\). Για να
+    βρούμε τις άλλες δύο θα πάρουμε την ορίζουσα
+    \begin{equation*}
+        \det
+        \begin{pmatrix}
+            -\sigma - \lambda & \sigma \\
+            \rho & -1 - \lambda \\
+        \end{pmatrix}=
+        (-\sigma - \lambda)(-1 - \lambda) - \sigma \rho,
+    \end{equation*}
+    που τελικά δίνει
+    \begin{equation*}
+        \lambda^2 + \lambda(\sigma + 1) + \sigma(1 - \rho) = 0.
+    \end{equation*}
+    Η διακρίνουσα της παραπάνω είναι
+    \begin{equation*}
+        \Delta = {(\sigma + 1)}^2 - 4\sigma(1 - \rho),
+    \end{equation*}
+    και οι ιδιοτιμές είναι
+    \begin{equation*}
+        \lambda_{2,3} = \frac{-(\sigma + 1) \pm \sqrt{\Delta}}{2}.
+    \end{equation*}
+    Αν \( \lambda_2 \) είναι η ιδιοτιμή που προκύπτει από το θετικό
+    πρόσημο που είναι μπροστά από την τετραγωνική ρίζα και αντίστοιχα
+    \( \lambda_3 \) η άλλη ιδιοτιμή, τότε προφανώς  \( \lambda_3 < 0 \). Θα
+    δούμε, για την ιδιοτιμή \( \lambda_2 \). Οι ρίζες της είναι
+    \begin{equation*}
+        -(\sigma + 1) + \sqrt{{(\sigma + 1)}^2 - 4\sigma(1 - \rho)} = 0,
+    \end{equation*}
+    όπου υψώνοντας στο τετράγωνο προκύπτει
+    \begin{equation*}
+        {(\sigma + 1)}^2 - 4\sigma(1 - \rho) = {(\sigma + 1)}^2,
+    \end{equation*}
+    ή
+    \begin{equation*}
+        - 4\sigma(1 - \rho) = 0,
+    \end{equation*}
+    και επειδή \( \sigma > 0 \), προκύπτει \( \rho = 1 \).
+
+    Άρα \( \lambda_2 < 0 \), όταν \( 0 < \rho < 1 \) και τότε, διότι
+    \( \lambda_1, \lambda_3 < 0 \), από το θεώρημα
+    \tl{Hartman-Grobman} το \( (0, 0, 0) \) είναι ασυμπτωτικά ευσταθές.
+
+    Όταν \( \rho > 1 \), τότε \( \lambda_2 > 0 \) και επειδή
+    \( \lambda_1, \lambda_3 < 0 \), η αρχή από το θεώρημα
+    \tl{Hartman-Grobman} είναι σάγμα. Αυτό αποδεικνύει το ερώτημα (γ)
+    \tl{ii}.
+
+    Όταν \( \rho = 1 \), τότε \( \lambda_2 = 0 \) και \( \lambda_3 = -(\sigma +
+    1) \) αλλά επειδή έχουμε μη υπερβολικό σημείο ισορροπίας δεν μπορούμε να
+    χρησιμοποιήσουμε το θεώρημα \tl{Hartman-Grobman}. Η αντίστοιχη ανάλυση για
+    τα άλλα δύο σημεία ισορροπίας είναι ιδιαίτερα πολύπλοκη και θα παραλειφθεί.
+
+    (β). Το σύστημα έχει τη συμμετρία \( (x, y, z) \to (-x, -y, z) \) και
+    φαίνεται εύκολα αν εφαρμόσουμε το μετασχηματισμό. Έτσι
+    \begin{align*}
+        -\dot{x} &= \sigma(-y + x) \\
+        -\dot{y} &= -\rho x + y + xz \\
+        \dot{z} &= -\beta z + (-x)(-y),
+    \end{align*}
+    όπου όμως το παραπάνω ισούται με το αρχικό
+    \begin{align*}
+        \dot{x} &= \sigma(y - x) \\
+        \dot{y} &= \rho x - y - xz \\
+        \dot{z} &= -\beta z + xy,
+    \end{align*}
+    και αυτό επιβεβαιώνει τη συμμετρία ως προς τον άξονα \( z \).
+
+    Ένα σύνολο \( K \subset \mathbb{R}^n \) είναι αναλλοίωτο για τη ροή ενός
+    διανυσματικού πεδίου εάν \( x \in K \Rightarrow \phi(x, t) \in K \).
+    Επομένως, για να ένα σημείο \( z \in (0, 0, z) \) έχουμε
+    \begin{align*}
+        \dot{x} &= 0 \\
+        \dot{y} &= 0 \\
+        \dot{z} &= -\beta z,
+    \end{align*}
+    και άρα η ροή του διανυσματικού πεδίου, για οποιοδήποτε σημείο πάνω στον
+    άξονα \( z \), παραμένει στον άξονα \( z \) για κάθε \( t \) και άρα είναι
+    αναλλοίωτη ευθεία για το σύστημα.
+
+    (γ) \tl{i}. Θα χρησιμοποιήσουμε τη συνάρτηση \tl{Lyapunov}
+    \begin{equation*}
+        V(x, y, z) = \rho x^2 + \sigma(y^2 + z^2),
+    \end{equation*}
+    για \( 0 < \rho < 1 \) και για το σημείο \( (0, 0, 0) \). Αρχικά στο σημείο
+    αυτό προφανώς ισχύει \( V(0, 0, 0) = 0 \) και για \( (x, y, z) \neq (0, 0,
+    0) \) βλέπουμε ότι \( V(x, y, z) > 0 \). Στη συνέχεια θα υπολογίσουμε το
+    ρυθμό μεταβολής της συνάρτησης \tl{Lyapunov}. Έτσι έχουμε
+    \begin{align*}
+        \frac{d}{dt}V(x(t), y(t), z(t))
+        &= 2\rho x \dot{x} + 2\sigma y \dot{y} + 2 \sigma z \dot{z} \\
+        &= 2\rho x (\sigma(y - x)) + 2\sigma y (\rho x - y - xz) + 2 \sigma z
+        (-\beta z + xy) \\
+        &= 2\rho x\sigma y - 2\rho\sigma x^2 + 2\sigma y\rho x - 2\sigma y^2 -
+        2\sigma yxz - 2 \sigma\beta z^2 + 2\sigma zxy \\
+        &= -2\sigma \left( -2\rho xy + \rho x^2 + y^2 + \beta z^2 \right) \\
+        &= -2\sigma \left( -2\rho xy + \rho x^2 + y^2 + \beta z^2 + \rho^2 x^2 -
+        \rho^2x^2\right) \\
+        &= -2\sigma \left[ {(\rho x - y)}^2 + \beta z^2 + \rho x^2(1 -
+        \rho)\right].
+    \end{align*}
+    Δεδομένου ότι \( 0 < \rho < 1 \), ισχύει \( \dot{V} < 0 \) καθώς όλοι οι
+    όροι είναι τετραγωνικοί. Έτσι για κάθε \( (x, y, z) \neq (0, 0, 0) \) και
+    συνεπώς είναι ολικά ασυμπτωτικά ευσταθές σημείο ισορροπίας.
+\end{solution}
