@@ -55,7 +55,7 @@ def dampedDuffingPlot(zeta, ic):
     plt.ylabel(r'$amplitude$')
     plt.xlabel('t')
     plt.grid(True)
-    plt.savefig('ex2_dampedDuffing.pdf')
+    #plt.savefig('ex2_dampedDuffing.pdf')
 
 def dampedDuffingPlotXY(zeta, ic):
     t, states = dampedDuffing(zeta, ic)

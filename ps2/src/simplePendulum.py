@@ -6,94 +6,45 @@ from matplotlib import rcParams
 rcParams['text.usetex'] = True
 rcParams['text.latex.unicode'] = True
 
-def U(x):
-    return -np.cos(x)
-def yplus(x, h):
-    return np.sqrt(2*h + np.cos(x))
-def yminus(x, h):
-    return -np.sqrt(2*h + np.cos(x))
-
-def undampedsimplePendulum():
-    x0 = -1.5*np.pi; xf = 1.5*np.pi
-    x = np.linspace(x0, xf, 100001)
-    #h = np.arange(0, 0.5*np.sqrt(2), 0.1)
-    h = [0, 0.3, 0.5, 0.7]
-
-    plt.figure(1)
-    plt.subplot(211)
-    plt.plot(x, U(x), 'C0')
-    plt.xlim(x0, xf)
-    plt.xlabel(r'$x$')
-    plt.ylabel(r'$U(x)$')
-    plt.grid()
-
-    plt.subplot(212)
-    for i in range(0,len(h)):
-        plt.plot(x, yplus(x, h[i]), 'C0', x, yminus(x, h[i]), 'C0')
-    plt.xlim(x0, xf)
-    plt.xlabel(r'$x(t)$')
-    plt.ylabel(r'$y(t)$')
-    plt.grid()
-    #plt.savefig('ps8_ex1a.png')
-
-def DsimplePedulum(var, t, alpha):
+def DsimplePedulum(var, t, alpha, T):
     x, y = var
-    return [y, -alpha*y - np.sin(x)]
+    return [y, -alpha*y - np.sin(x) + T]
 
-def simplePedulum(alpha, ic):
-    t = np.linspace(0, 50, 10001)
-    statesPlus = odeint(DsimplePedulum, ic, t, (alpha, ))
-    ic[1] *= -1
-    statesMinus = odeint(DsimplePedulum, ic, t, (alpha, ))
-    return [t, statesPlus, statesMinus]
+def simplePedulum(alpha, T, ic):
+    t = np.linspace(0, 50, 101)
+    states = odeint(DsimplePedulum, ic, t, (alpha, T))
+    return [t, states]
 
-def simplePedulumPlot(alpha, ic):
-    t, statesPlus, statesMinus = simplePedulum(alpha, ic)
-    plt.figure(4)
-    plt.plot(t, statesPlus[:, 0], label='x(t)')
-    plt.plot(t, statesPlus[:, 1], label='y(t)')
-    plt.plot(t, statesMinus[:, 0], label='x(t)')
-    plt.plot(t, statesMinus[:, 1], label='y(t)')
+def simplePedulumPlot(alpha, T, ic):
+    t, states = simplePedulum(alpha, T, ic)
+    plt.figure(1)
+    xlabel = '$x(t), a = ' + str(alpha) + ', T = ' + str(T) + '$'
+    ylabel = '$y(t), a = ' + str(alpha) + ', T = ' + str(T) + '$'
+    plt.plot(t, states[:, 0], label=xlabel)
+    plt.plot(t, states[:, 1], label=ylabel)
     plt.legend(loc='best')
-    plt.xlabel('t')
-    plt.grid()
-
-def simplePedulumPlotXY(alpha, ic):
-    t, statesPlus, statesMinus = simplePedulum(alpha, ic)
-    plt.figure(5)
-    plt.plot(statesPlus[:, 0], statesPlus[:, 1], 'C0')
-    plt.plot(statesMinus[:, 0], statesMinus[:, 1], 'C0')
-    plt.xlim(-2.1*np.pi, 2.1*np.pi)
-    plt.ylim(-3.5, 3.5)
-    plt.xlabel(r'$x(t)$')
-    plt.ylabel(r'$y(t)$')
+    plt.ylabel(r'$amplitude$')
+    plt.xlabel(r'$t$')
     plt.grid(True)
 
-def dampedVectorField(alpha):
-    x0 = -2*np.pi; xf = 2*np.pi
-    y0 = -3; yf = 3
-    x = np.arange(x0, xf, .5)
-    y = np.arange(y0, yf, .5)
-    X, Y = np.meshgrid(x, y)
-    DX = Y
-    DY = -alpha*Y - np.sin(X)
+def equilibriumPerTorque(k = 0):
+    x1 = lambda T, k: 2*k*np.pi + np.arcsin(T)
+    x2 = lambda T, k: (2*k + 1)*np.pi - np.arcsin(T)
+    print("for T = 0.5, x1 =", x1(0.5, k),"and x2 =",x2(0.5, k))
+    print("for T = 0.7, x1 =", x1(0.7, k),"and x2 =",x2(0.7, k))
+    T = np.linspace(0, 1, 1001)
+    plt.figure(2)
+    plt.plot(T, x1(T, k), label=r'$x_1(T)$')
+    plt.plot(T, x2(T, k), label=r'$x_2(T)$')
+    plt.legend(loc='best')
+    plt.ylabel(r'$equilibirum$')
+    plt.xlabel(r'$T$')
+    plt.xlim(T[0], 1.1)
+    plt.grid(True)
+    #plt.savefig('ex4_equilibriumPerTorque.pdf')
 
-    plt.figure(6)
-    plt.streamplot(X, Y, DX, DY)
-    plt.xlabel(r'$x(t)$')
-    plt.ylabel(r'$y(t)$')
-    plt.grid()
 
-def phase_plot(alpha):
-    ic = [[0, 0.2], [0, 1], [-2*np.pi, 0.2],\
-            [-2*np.pi, 1], [2*np.pi, 0.2], [-2*np.pi, 1],\
-            [2*np.pi, 0.2], [2*np.pi, 1], [0, 2],\
-            [2*np.pi, -2], [2*np.pi, 2], [-2*np.pi, -2],\
-            [-2*np.pi, 2], [0, -2], [0, 2.5],\
-            [0, -2.5], [0, 3], [0, -3]]
-    for i in ic:
-        simplePedulumPlotXY(alpha, i)
-
-alpha = -0.5
-phase_plot(alpha)
-plt.show()
+if __name__ == "__main__":
+    simplePedulumPlot(0.1, 0, [0.5, 0.5])
+    #equilibriumPerTorque()
+    plt.show()
