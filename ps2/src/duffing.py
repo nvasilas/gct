@@ -22,19 +22,20 @@ def undampedDuffingPlot():
     h = np.arange(-0.2, 1, 0.2)
 
     plt.figure(1)
-    plt.subplot(211)
     plt.plot(x, U(x), 'C0')
     plt.xlim(x0, xf)
     plt.ylabel(r'$U(x)$')
+    plt.xlabel(r'$x$')
     plt.grid()
-    plt.subplot(212)
+    #plt.savefig('ex2_undampedDuffingU.pdf')
+    plt.figure(2)
     for i in range(0,len(h)):
         plt.plot(x, yplus(x, h[i]), 'C0', x, yminus(x, h[i]), 'C0')
     plt.xlim(x0, xf)
     plt.xlabel(r'$x$')
     plt.ylabel(r'$y(x)$')
     plt.grid(True)
-    #plt.savefig('ex2_undampedDuffing.pdf')
+    #plt.savefig('ex2_undampedDuffingPor.pdf')
 
 """ex2_b"""
 def DdampedDuffing(var, t, zeta):
@@ -48,7 +49,7 @@ def dampedDuffing(zeta, ic):
 
 def dampedDuffingPlot(zeta, ic):
     t, states = dampedDuffing(zeta, ic)
-    plt.figure(2)
+    plt.figure(3)
     plt.plot(t, states[:, 0], label='$x(t), \zeta = ' + str(zeta) + '$')
     plt.plot(t, states[:, 1], label='$y(t), \zeta = ' + str(zeta) + '$')
     plt.legend(loc='best')
@@ -59,7 +60,7 @@ def dampedDuffingPlot(zeta, ic):
 
 def dampedDuffingPlotXY(zeta, ic):
     t, states = dampedDuffing(zeta, ic)
-    plt.figure(3)
+    plt.figure(4)
     plt.plot(states[:, 0], states[:, 1], 'C0')
     plt.xlabel(r'$x(t)$')
     plt.ylabel(r'$y(t)$')
